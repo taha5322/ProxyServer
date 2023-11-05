@@ -79,6 +79,8 @@ Additionally, the rate-limiting logic was set up in an if-else statement rather 
 1. Improving code readability by preventing the need to traverse various files for relatively simple functionality   
 2. Adding additional features to this workflow, such as the 'sharded rate-limiting' or 'retries', could be added by chaining that code together together in additional else-if blocks, easing the time taken to integrate newer functions while keeping the process flow easy to understand
 
+A limitations that could exist with this design is the effectiveness of the rate mechanism. The rate limiting could be abused in a way such that users continuously ping the endpoint server until they reach the max bucket amount (which is set to 3). This means that all other users will be affected by some. In more formal terms, this functionality isn't rate-limit by IP, it's a global limit, which is naturally not as effective.
+
 
 ### Scaling the Server
 ----
