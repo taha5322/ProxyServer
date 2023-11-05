@@ -12,6 +12,8 @@ import (
 	"golang.org/x/time/rate"
 )
 
+// hard coded for clarity
+// avg 1 request per second; max 3 requests per burst
 var limiter = rate.NewLimiter(1, 3)
 
 func main() {
