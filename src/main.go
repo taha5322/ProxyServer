@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"net/http"
 	"net/url"
 	"os"
+	"time"
 )
 
 func main() {
@@ -17,5 +20,12 @@ func main() {
 	if err != nil {
 		log.Fatal("Error, invalid URL")
 	}
+
+	reverseProxy := http.HandlerFunc(func(response_writer http.ResponseWriter, request *http.Request) {
+
+		// logging request
+		fmt.Printf("[reverse proxy server] received request at: %s\n", time.Now())
+
+	})
 
 }
