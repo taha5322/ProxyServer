@@ -35,6 +35,12 @@ func main() {
 		// send request to the origin server and save
 		originServerResponse, err := http.DefaultClient.Do(request)
 
+		// catch error with response and logging
+		if err != nil {
+			response_writer.WriteHeader(http.StatusInternalServerError)
+			_, _ = fmt.Fprint(response_writer, err)
+			return
+		}
 	})
 
 }
