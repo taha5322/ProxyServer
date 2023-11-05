@@ -4,7 +4,7 @@ This git repository houses an origin server along with a basic reverse-proxy tha
 
 
 
-Contents
+### Contents
 ========
 
  * [Installation and Usage](#installation-and-usage)
@@ -111,7 +111,7 @@ As large-scale services can expect to be targetted by attacks, the reverse-proxy
 
 **Knowledge Refreshing:** To refresh my knowledge and understand the problem at hand, I read various articles regarding proxy servers and their usecases, implementations, and quirks. 
 
-**Proxy Servers:** [This article]((https://www.strongdm.com/blog/difference-between-proxy-and-reverse-proxy)) from **StrongDM** to understand the difference between forward and reverse proxy servers. My main takeaway was explaining the user's scope when interacting with the servers. For example, forward proxy = middle-man of user+server by acting as the user when speaking to server; Reverse proxy = middle man acting as the server while speaking to user.
+**Proxy Servers:** [This article](https://www.strongdm.com/blog/difference-between-proxy-and-reverse-proxy) from **StrongDM** to understand the difference between forward and reverse proxy servers. My main takeaway was explaining the user's scope when interacting with the servers. For example, forward proxy = middle-man of user+server by acting as the user when speaking to server; Reverse proxy = middle man acting as the server while speaking to user.
 
 **Reverse Proxy Servers:** From there, I moved onto the two following articles from [**Cloudfare**](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/) and [**Nginx**](https://www.nginx.com/resources/glossary/reverse-proxy-server/) to fill in conceptual gaps about reverse-proxy servers and their function. I understood large scale use-cases of this server-based architecture in a production setting, for micro-service architectures and backend applications. 
 
