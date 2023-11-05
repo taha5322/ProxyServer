@@ -8,7 +8,11 @@ import (
 	"net/url"
 	"os"
 	"time"
+
+	"golang.org/x/time/rate"
 )
+
+var limiter = rate.NewLimiter(1, 3)
 
 func main() {
 
@@ -24,28 +28,37 @@ func main() {
 
 	reverseProxy := http.HandlerFunc(func(response_writer http.ResponseWriter, request *http.Request) {
 
-		// logging request
-		fmt.Printf("[reverse proxy server] received request at: %s\n", time.Now())
+		// ensuring concurrent calls are within threshold
+		if !limiter.Allow() {
+			http.Error(response_writer, http.StatusText(http.StatusTooManyRequests), http.StatusTooManyRequests)
+			response_writer.WriteHeader(http.StatusTooManyRequests)
 
-		// setting request to point to origin server
-		request.Host = originServerURL.Host
-		request.URL.Host = originServerURL.Host
-		request.URL.Scheme = originServerURL.Scheme
-		request.RequestURI = ""
+		} else {
 
-		// send request to the origin server and save
-		originServerResponse, err := http.DefaultClient.Do(request)
+			// logging request
+			fmt.Printf("[reverse proxy server] received request at: %s\n", time.Now())
 
-		// catch error with response and logging
-		if err != nil {
-			response_writer.WriteHeader(http.StatusInternalServerError)
-			_, _ = fmt.Fprint(response_writer, err)
-			return
+			// setting request to point to origin server
+			request.Host = originServerURL.Host
+			request.URL.Host = originServerURL.Host
+			request.URL.Scheme = originServerURL.Scheme
+			request.RequestURI = ""
+
+			// send request to the origin server and save
+			originServerResponse, err := http.DefaultClient.Do(request)
+
+			// catch error with response and logging
+			if err != nil {
+				response_writer.WriteHeader(http.StatusInternalServerError)
+				_, _ = fmt.Fprint(response_writer, err)
+				return
+			}
+
+			// return response to the client
+			response_writer.WriteHeader(http.StatusOK)
+			io.Copy(response_writer, originServerResponse.Body)
+
 		}
-
-		// return response to the client
-		response_writer.WriteHeader(http.StatusOK)
-		io.Copy(response_writer, originServerResponse.Body)
 
 	})
 
