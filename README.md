@@ -89,3 +89,37 @@ Setting up visibility services like Grafana and disaster-monitoring software lik
 Improving security can be done through following best-practices common in the space. One such way is through introducing encryption.
 
 As large-scale services can expect to be targetted by attacks, the reverse-proxy can be in-charge of encrypting and decrypting messages to and from the origin server. This adds a layer of security to ensure our origin is protected and can reliably perform despite the threats
+
+
+
+### Resources Used
+---
+
+##### Articles
+
+**Knowledge Refreshing:** To refresh my knowledge and understand the problem at hand, I read various articles regarding proxy servers and their usecases, implementations, and quirks. 
+
+**Proxy Servers:** [This article]((https://www.strongdm.com/blog/difference-between-proxy-and-reverse-proxy)) from **StrongDM** to understand the difference between forward and reverse proxy servers. My main takeaway was explaining the user's scope when interacting with the servers. For example, forward proxy = middle-man of user+server by acting as the user when speaking to server; Reverse proxy = middle man acting as the server while speaking to user.
+
+**Reverse Proxy Servers:** From there, I moved onto the two following articles from [**Cloudfare**](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/) and [**Nginx**](https://www.nginx.com/resources/glossary/reverse-proxy-server/) to fill in conceptual gaps about reverse-proxy servers and their function. I understood large scale use-cases of this server-based architecture in a production setting, for micro-service architectures and backend applications. 
+
+**Rate Limiting:** To understand rate-limiting and its importance, I had a brief read of [this IBM article](https://www.ibm.com/docs/en/sva/9.0.6?topic=configuration-rate-limiting) which explained how server reliability and security can be improved with rate-limiting.
+
+##### Go Documentation
+
+As I'm a beginner at Golang, my first step was to familiarize myself with go syntax, structures, depedancy management, and additional quirks that are unique to go. 
+
+Naturally, I followed the [Go Documentation](https://go.dev/doc/tutorial/getting-started) to install the language, familiarize myself with the structure, and to set up the initial project.
+
+
+##### Blog posts
+
+**Origin Server:** To set up a dummy origin server, I used this [article](https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go) from DigitalOcean. The forward proxy had very few requirements but to return a response and log timestamps upon call.
+
+**Reverse Proxy:** Setting up the reverse proxy was quite similar to the first step, but this time, redirecting the requests was the major addition. This was done through connecting to the origin server and parsing the endpoint to get the server credentials, before forwarding the request. This [medium article](https://dev.to/b0r/implement-reverse-proxy-in-gogolang-2cp4) summarized the process quite well
+
+**Rate Limiting:** The rate-limiting, which was the real engineering challenge of this task was done. There were several ways to perform this task and I changed my process several times but ended up drawing inspiration from [this blogpost](https://www.alexedwards.net/blog/how-to-rate-limit-http-requests
+). It walked through various functionality of the `golang.org/x/time/rate` package used that I implemented the functionality with
+
+
+
