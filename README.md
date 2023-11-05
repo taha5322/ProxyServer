@@ -4,6 +4,19 @@ This git repository houses an origin server along with a basic reverse-proxy tha
 
 
 
+Contents
+========
+
+ * [Installation and Usage](#installation-and-usage)
+ * [Dependancies](#dependancies)
+ * [Design Decisions](#design-decisions)
+ * [Scaling the Server](#scaling-the-server)
+ * [Improving Server Security](#improving-server-security)
+ * [Resources Used](#resources-used)
+
+
+
+
 ### Installation and Usage
 ---
 
