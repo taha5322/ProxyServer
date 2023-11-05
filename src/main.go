@@ -62,4 +62,7 @@ func main() {
 
 	})
 
+	// binding reverse-proxy to port
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("REV_PROXY_PORT"), reverseProxy))
+
 }
