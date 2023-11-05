@@ -36,3 +36,32 @@ $ go run origin.go
 $ cd /src
 $ go run .
 ```
+
+
+### Design Decisions
+---
+
+##### Forward Proxy
+
+The forward proxy was simple and primarily a placeholder for this process so only had the few following considerations
+
+1. Returned a verbose response upon call 
+2. logging the simple timestamp of each request
+
+The obvious limitation of this design is the lack of state-based responses from the origin server. Though it does the job, it's not similar to an origin server in a production setting 
+
+##### Reverse Proxy
+
+The reverse proxy implements the **global in-flight request limit** functionality, preventing the origin to be pinged while it is serving a certain number of concurrent requests. Here is the basic functionality of the reverse proxy:
+
+1. In normal case, it forwards the origin's message to the user
+2. If origin is serving more than the allowed concurrent users, a `http.StatusTooManyRequests` status code is returned
+3. The timestamp of each request is logged
+
+**Reverse-proxy Design:**
+
+The rate limiting logic was set up through the `x/time/rate` package which uses a [token bucket](https://en.wikipedia.org/wiki/Token_bucket) limiting algorithm; a standard algorithm in telecomm networks. The `limiter.Allow()` function, which ensures concurrent requests are below the threshold, is protected by a **mutex** which is why it's reliable during concurrent requests. This is helpful as it abstracts away the reliability of our reverse-proxy.
+
+Additionally, the rate-limiting logic was set up in an if-else statement rather than being put into a helper package in another file. This was done for two reasons:
+1. Improving code readability by preventing the need to traverse various files for relatively simple functionality   
+2. Adding additional features to this workflow, such as the 'sharded rate-limiting' or 'retries', could be added by chaining that code together together in additional else-if blocks, easing the time taken to integrate newer functions while keeping the process flow easy to understand
