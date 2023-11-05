@@ -83,3 +83,9 @@ Depending on the server's usecase, several responses can come from similar or id
 
 Setting up visibility services like Grafana and disaster-monitoring software like PagerDuty can help our infra teams stay ahead of the curve, while allowing regular engineers to easily monitor the state of the production system. This will allow them to pick up anomolous patterns in performance and fix them before a large-scale break
 
+
+### Improving Server Security
+---
+Improving security can be done through following best-practices common in the space. One such way is through introducing encryption.
+
+As large-scale services can expect to be targetted by attacks, the reverse-proxy can be in-charge of encrypting and decrypting messages to and from the origin server. This adds a layer of security to ensure our origin is protected and can reliably perform despite the threats
