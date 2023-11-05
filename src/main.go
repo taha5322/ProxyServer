@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -41,6 +42,11 @@ func main() {
 			_, _ = fmt.Fprint(response_writer, err)
 			return
 		}
+
+		// return response to the client
+		response_writer.WriteHeader(http.StatusOK)
+		io.Copy(response_writer, originServerResponse.Body)
+
 	})
 
 }
