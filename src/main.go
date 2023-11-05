@@ -26,6 +26,7 @@ func main() {
 		log.Fatal("Error, invalid URL")
 	}
 
+	// reverse proxy handler object
 	reverseProxy := http.HandlerFunc(func(response_writer http.ResponseWriter, request *http.Request) {
 
 		// ensuring concurrent calls are within threshold
@@ -62,6 +63,6 @@ func main() {
 
 	})
 
-	// binding reverse-proxy to port
+	// binding reverse-proxy to desired port
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("REV_PROXY_PORT"), reverseProxy))
 }
