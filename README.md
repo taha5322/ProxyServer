@@ -21,6 +21,7 @@ This git repository houses an origin server along with a basic reverse-proxy tha
 
 #### Part 1: Cloning github repo
 setting up project
+**Note**: please clone this project into your user directory where golang was installed
 ```bash
 $ git clone https://github.com/taha5322/ProxyServer.git
 ```

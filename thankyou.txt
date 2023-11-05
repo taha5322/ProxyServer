@@ -1,0 +1,8 @@
+This isn't part of a regular PR But:
+This project was a super exciting journey and I learned a good bunch. 
+As I didn't have much experience with Golang specifically, I started by learning it and brushed up on server-side architecture
+This was before ultimately adding the reverse-proxy functionality for global in-flight request limiting. 
+The assessment definitely taught me a lot, and was a really fun use of my time. 
+So thank you for giving me this challenge and I hope to work with you guys this Winter :)
+
+Cheers!!
