@@ -65,3 +65,21 @@ The rate limiting logic was set up through the `x/time/rate` package which uses 
 Additionally, the rate-limiting logic was set up in an if-else statement rather than being put into a helper package in another file. This was done for two reasons:
 1. Improving code readability by preventing the need to traverse various files for relatively simple functionality   
 2. Adding additional features to this workflow, such as the 'sharded rate-limiting' or 'retries', could be added by chaining that code together together in additional else-if blocks, easing the time taken to integrate newer functions while keeping the process flow easy to understand
+
+
+### Scaling the Server
+----
+
+To provide effective scalability, a mixture of battle-tested techniques for managing large-scale workloads and through workflows that allow engineers to pragmaticlly diagnose flaws ahead of time.
+
+##### Load Balancing
+As concurrent requests may need to be exceedingly high for some servers, a load balancing mechanism can be introduced to split workloads over multiple origin servers. This is to prevent overload on one server by evenly allocating requests throughout origin server infrastructure, to optimize for performance and reliability. In addition, failiure to respond for one origin server can simply mean requests are dynamically re-forwarded to origin servers that are still working
+
+##### Caching
+
+Depending on the server's usecase, several responses can come from similar or identical requests. Therefore, a caching mechanism could help our service perform reliably at scale by ensuring identical workloads aren't repeatedly processed
+
+##### Monitoring
+
+Setting up visibility services like Grafana and disaster-monitoring software like PagerDuty can help our infra teams stay ahead of the curve, while allowing regular engineers to easily monitor the state of the production system. This will allow them to pick up anomolous patterns in performance and fix them before a large-scale break
+
