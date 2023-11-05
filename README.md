@@ -4,7 +4,7 @@ This git repository houses an origin server along with a basic reverse-proxy tha
 
 
 
-Contents
+### Contents
 ========
 
  * [Installation and Usage](#installation-and-usage)
