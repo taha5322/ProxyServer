@@ -26,6 +26,15 @@ func main() {
 		// logging request
 		fmt.Printf("[reverse proxy server] received request at: %s\n", time.Now())
 
+		// setting request to point to origin server
+		request.Host = originServerURL.Host
+		request.URL.Host = originServerURL.Host
+		request.URL.Scheme = originServerURL.Scheme
+		request.RequestURI = ""
+
+		// send request to the origin server and save
+		originServerResponse, err := http.DefaultClient.Do(request)
+
 	})
 
 }
